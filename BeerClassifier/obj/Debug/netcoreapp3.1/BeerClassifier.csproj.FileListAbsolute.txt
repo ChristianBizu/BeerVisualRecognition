@@ -18,3 +18,4 @@ C:\Users\c.bizumuremyi\source\repos\BeerClassifier\BeerClassifier\obj\Debug\netc
 C:\Users\c.bizumuremyi\source\repos\BeerClassifier\BeerClassifier\obj\Debug\netcoreapp3.1\BeerClassifier.dll
 C:\Users\c.bizumuremyi\source\repos\BeerClassifier\BeerClassifier\obj\Debug\netcoreapp3.1\BeerClassifier.pdb
 C:\Users\c.bizumuremyi\source\repos\BeerClassifier\BeerClassifier\obj\Debug\netcoreapp3.1\BeerClassifier.genruntimeconfig.cache
+C:\Users\c.bizumuremyi\source\repos\BeerClassifier\BeerClassifier\obj\Debug\netcoreapp3.1\BeerClassifier.csprojAssemblyReference.cache
