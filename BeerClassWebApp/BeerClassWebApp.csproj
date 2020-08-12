@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BeerClassifier.Services\BeerClassifier.Services.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -14,7 +14,7 @@ namespace BeerClassifier
     {
 
         private const string API_KEY = "5S2-zoepnLrgIYttY5YaWcahm8yeZgLLwenH4eESZJlO";
-        private const string IMG = "00000034.jpg";
+        private const string IMG = "prueba_estrella.jpeg";
         private const string API_URL = "https://gateway.watsonplatform.net/visual-recognition/api";
 
         static void Main(string[] args)
@@ -41,7 +41,7 @@ namespace BeerClassifier
 
                 ClassifyResponseModel response = ClassifyResponseModel.ToModel(service_response);
 
-                //Console.WriteLine("RESULTADO DE CLASIFICAR LA IMAGEN: "+ IMG + "\n\n" + service_response);
+                Console.WriteLine("RESULTADO DE CLASIFICAR LA IMAGEN: "+ IMG + "\n\n" + service_response);
             }
             catch (ServiceResponseException e)
             {
