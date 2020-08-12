@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wUzfExwGxxayspa3xi4MtWxzBI50JTE9oBcJoB6U8I1vPmO8BgBZbVOHclegZNFgyzZJTK/83MkkdLhMRKQJ4A==",
+  "dgSpecHash": "TTJtAL9nkX0ypFVcm96hVRbMmP6xATKmHkaZ1AXk2cgSy9UgN8k8V9M64FgX5X5R38Bl/+mvTJPZF3lMyHXw3g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\Console_Application_BeerClassifier.csproj",
+  "projectFilePath": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\BeerClassifier.ConsoleApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\c.bizumuremyi\\.nuget\\packages\\ibm.cloud.sdk.core\\1.1.0\\ibm.cloud.sdk.core.1.1.0.nupkg.sha512",
     "C:\\Users\\c.bizumuremyi\\.nuget\\packages\\ibm.watson.common\\4.5.0\\ibm.watson.common.4.5.0.nupkg.sha512",

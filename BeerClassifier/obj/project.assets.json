@@ -5929,9 +5929,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\Console_Application_BeerClassifier.csproj",
-      "projectName": "Console_Application_BeerClassifier",
-      "projectPath": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\Console_Application_BeerClassifier.csproj",
+      "projectUniqueName": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\BeerClassifier.ConsoleApp.csproj",
+      "projectName": "BeerClassifier.ConsoleApp",
+      "projectPath": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\BeerClassifier.ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\c.bizumuremyi\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\c.bizumuremyi\\source\\repos\\BeerClassifier\\BeerClassifier\\obj\\",
       "projectStyle": "PackageReference",
