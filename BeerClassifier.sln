@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console_Application_BeerClassifier", "BeerClassifier\Console_Application_BeerClassifier.csproj", "{A9266009-8F49-4978-AAD5-B31E0D31C272}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerClassifier.ConsoleApp", "BeerClassifier\BeerClassifier.ConsoleApp.csproj", "{A9266009-8F49-4978-AAD5-B31E0D31C272}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerClassWebApp", "BeerClassWebApp\BeerClassWebApp.csproj", "{E85D62A2-205F-4842-946F-10EAEC6AC507}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerClassifer.WebApp", "BeerClassWebApp\BeerClassifer.WebApp.csproj", "{E85D62A2-205F-4842-946F-10EAEC6AC507}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerClassifier.Services", "BeerClassifier.Services\BeerClassifier.Services.csproj", "{8F7390BA-F69D-4E65-B98D-EA090EA63667}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{60405884-8706-4051-86E2-D89AC50CA964}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{56DD38CE-C360-4F82-9949-40540A37DF2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A9266009-8F49-4978-AAD5-B31E0D31C272} = {60405884-8706-4051-86E2-D89AC50CA964}
+		{E85D62A2-205F-4842-946F-10EAEC6AC507} = {60405884-8706-4051-86E2-D89AC50CA964}
+		{8F7390BA-F69D-4E65-B98D-EA090EA63667} = {56DD38CE-C360-4F82-9949-40540A37DF2D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99CCF62F-32C5-427E-8A82-3B2853C5F671}
