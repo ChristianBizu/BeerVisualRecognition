@@ -5,9 +5,11 @@ using IBM.Cloud.SDK.Core.Http;
 using IBM.Cloud.SDK.Core.Http.Exceptions;
 using IBM.Watson.VisualRecognition.v3;
 using IBM.Watson.VisualRecognition.v3.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BeerClassifier.Services.Infrastructure
 {
@@ -20,6 +22,8 @@ namespace BeerClassifier.Services.Infrastructure
         private string API_ENPOINT;
         private string API_MODEL_ID;
         private string API_OWNER;
+
+        public IList<Classifier_class> Classes = new List<Classifier_class>();
 
         public IBMVisualRecognitionService() 
         {
@@ -41,27 +45,27 @@ namespace BeerClassifier.Services.Infrastructure
             visualRecognition.SetServiceUrl(API_ENPOINT);
             visualRecognition.DisableSslVerification(true);
             visualRecognition.WithHeader("X-Watson-Learning-Opt-Out", "true");
+            
+            GetClassifier();
         }
 
-        public string ClassifyImage(string imageName, string imageURL)
+        public IBMClassifyResponseModel ClassifyImage(string imageName, string imageURL)
         {
             try
             {
-                string service_response = GetClassifier();
+                var classify_reponse = Classify(imageName, imageURL);
 
-                service_response = Classify(imageName, imageURL);
+                IBMClassifyResponseModel response = IBMClassifyResponseModel.ToModel(classify_reponse);
 
-                IBMResponseModel response = IBMResponseModel.ToModel(service_response);
-
-                return service_response;
+                return response;
             }
             catch (ServiceResponseException e)
             {
-                return e.Message;
+                return new IBMClassifyResponseModel() { ResponseDesc = e.Message, Custom_classes_count = 0 };
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new IBMClassifyResponseModel() { ResponseDesc = e.Message, Custom_classes_count = 0 };
             }
         }
 
@@ -87,13 +91,19 @@ namespace BeerClassifier.Services.Infrastructure
             return result.Response;
         }
 
-        private string GetClassifier()
+        private ProcessedImageResponseModel GetClassifier()
         {
             var result = visualRecognition.GetClassifier(
                             classifierId: API_MODEL_ID
                         );
 
-            return result.Response;
+            GetClassifiersReponse myDeserializedClass = JsonConvert.DeserializeObject<GetClassifiersReponse>(result.Response);
+
+            ProcessedImageResponseModel processed = ProcessedImageResponseModel.ToModel(myDeserializedClass);
+
+            Classes = processed.Classes;
+
+            return processed;
         }
     }
 }

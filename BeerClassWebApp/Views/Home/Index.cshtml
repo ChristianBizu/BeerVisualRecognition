@@ -1,19 +1,26 @@
-﻿
-@model BeerClassWebApp.Controllers.CreatePost
+﻿@model BeerClassWebApp.Controllers.CreatePost
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="text-center">
-        <h1 class="display-4">Beer Scan</h1>
+<div class="text-center">
+    <h1 class="display-4">Beer Scan</h1>
 
-        <form asp-action="Index" enctype="multipart/form-data">
+    @{
+        if (Model.ErrorMessage.Length > 0)
+        {
+            <div class="alert alert-danger" role="alert">
+                Ha habido un error procesando la imagen por favor intentelo de nuevo.
+            </div>
+        }
+    }
 
-            <p>Nombre de la Imagen: <input asp-for="ImageCaption" /></p>
-            <p><input asp-for="MyImage" /></p>
+    <form asp-action="Index" enctype="multipart/form-data">
 
-            <input type="submit" />
-        </form>
+        <p><input asp-for="ImageCaption" /> Nombre de la Imagen</p>
+        <p><input asp-for="MyImage" /></p>
 
-    </div>
+        <input type="submit" />
+    </form>
+</div>

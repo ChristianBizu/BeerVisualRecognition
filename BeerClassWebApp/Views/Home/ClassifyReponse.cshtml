@@ -1,5 +1,5 @@
 ﻿
-@model BeerClassWebApp.Controllers.CreatePost
+@model BeerClassifer.WebApp.Models.ProcessedImageModel;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -8,12 +8,6 @@
     <div class="text-center">
         <h1 class="display-4">Beer Scan</h1>
 
-        <form asp-action="Index" enctype="multipart/form-data">
 
-            <p>Nombre de la Imagen: <input asp-for="ImageCaption" /></p>
-            <p><input asp-for="MyImage" /></p>
-
-            <input type="submit" />
-        </form>
 
     </div>

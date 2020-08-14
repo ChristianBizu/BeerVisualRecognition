@@ -1,6 +1,6 @@
 using System;
 
-namespace BeerClassWebApp.Models
+namespace BeerClassifier.WebApp.Models
 {
     public class ErrorViewModel
     {

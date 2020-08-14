@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BeerClassWebApp.Models;
+using BeerClassifer.WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using BeerClassifier.Services.Core;
 using Microsoft.Extensions.Configuration;
+using BeerClassifier.WebApp.Models;
+using BeerClassifier.Services.Model;
 
 namespace BeerClassWebApp.Controllers
 {
@@ -40,7 +42,7 @@ namespace BeerClassWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View( new CreatePost());
+            return View(new CreatePost() { ErrorMessage = "" }); ;
         }
 
         [HttpPost]
@@ -51,11 +53,26 @@ namespace BeerClassWebApp.Controllers
                 var uniqueFileName = GetUniqueFileName(model.MyImage.FileName);
                 var uploads = Path.Combine(_hostingEnvironment.WebRootPath, IMAGE_FOLDER);
                 var filePath = Path.Combine(uploads, uniqueFileName);
-                model.MyImage.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                using (var stream = System.IO.File.Open(filePath, FileMode.Create))
+                {
+                    model.MyImage.CopyTo(stream);
+                }
 
                 _iBMVisualRecognitionService.ConfigureService(Configuration[CONF_API_KEY], Configuration[CONF_API_ENDPOINT], 
                                                                 Configuration[CONF_API_MODEL_ID], Configuration[CONF_API_OWNER]);
-            
+
+                var response = _iBMVisualRecognitionService.ClassifyImage(model.ImageCaption, filePath);
+
+                if (response.ResponseResult == ResponseResult.OK)
+                {
+                    return View("ClassifyResponse", response);
+                }
+                else 
+                {
+                    model.ErrorMessage = "Error procesando la imagen";
+                    return View(model);
+                }            
             }
 
             return RedirectToAction("Index", "Home");
@@ -96,5 +113,6 @@ namespace BeerClassWebApp.Controllers
     {
         public string ImageCaption { set; get; }
         public IFormFile MyImage { set; get; }
+        public string ErrorMessage { get; set; }
     }
 }
