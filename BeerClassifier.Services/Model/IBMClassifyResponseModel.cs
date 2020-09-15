@@ -1,4 +1,5 @@
-﻿using BeerClassifier.Services.Infrastructure;
+﻿using BeerClassfier.Entities;
+using BeerClassifier.Services.Infrastructure;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -72,23 +73,7 @@ namespace BeerClassifier.Services.Model
     {
         public string Class { get; set; }
         public double Accuracy { get; set; }
-
-        public Beer Beer { get; set; }
-
-        public static ClassifyResponseViewModel ToModel(IBMClassifyResponseModel response) 
-        {
-            if (response.Image_procesed_list.Any()
-                && response.Image_procesed_list.First().Classifiers_list.Any()
-                && response.Image_procesed_list.First().Classifiers_list.First().Classes_list.Any())
-            {
-                var match = response.Image_procesed_list.First().Classifiers_list.First().Classes_list.First();
-
-                var beer = BeerService.GetBeers().FirstOrDefault(x=> x.ClassName.Equals(match.Model_class));
-
-                return new ClassifyResponseViewModel { Class = match.Model_class, Accuracy = match.Model_score, Beer = beer };
-            }
-            return new ClassifyResponseViewModel();
-        }
+        public BeerViewModel Beer { get; set; }       
     }
 
     public enum ResponseResult

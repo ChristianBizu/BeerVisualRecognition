@@ -13,37 +13,51 @@ using BeerClassifier.Services.Core;
 using Microsoft.Extensions.Configuration;
 using BeerClassifier.WebApp.Models;
 using BeerClassifier.Services.Model;
+using MongoRepository;
+using BeerClassfier.Entities;
+using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
+using MvcContrib.Filters;
+using BeerClassifier.Services.Infrastructure;
 
 namespace BeerClassWebApp.Controllers
 {
+    [PassParametersDuringRedirect]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IIBMVisualRecognitionService _iBMVisualRecognitionService;
         private readonly IConfiguration Configuration;
+        private readonly IBeerService _beerService;
 
         private const string CONF_API_KEY = "ApiSettings:ApiKey";
         private const string CONF_API_ENDPOINT = "ApiSettings:ApiEndpoint";
         private const string CONF_API_MODEL_ID = "ApiSettings:ApiModelID";
         private const string CONF_API_OWNER = "ApiSettings:ApiOwner";
         private const string IMAGE_FOLDER = "uploads";
+        private const string TEMP_DATA_BEER = "beer";
+
+
 
         public HomeController(ILogger<HomeController> logger,
                                 IWebHostEnvironment hostingEnvironment,
                                 IIBMVisualRecognitionService iBMVisualRecognitionService,
-                                IConfiguration configuration)
+                                IConfiguration configuration,
+                                IBeerService beerService)
         {
             _logger = logger;
             _hostingEnvironment = hostingEnvironment;
             _iBMVisualRecognitionService = iBMVisualRecognitionService;
             Configuration = configuration;
+            _beerService = beerService;
         }
 
         public IActionResult Index()
         {
             return View(new CreatePost() { ErrorMessage = "" }); ;
         }
+
 
         [HttpPost]
         public IActionResult Index(CreatePost model)
@@ -66,7 +80,9 @@ namespace BeerClassWebApp.Controllers
 
                 if (response.ResponseResult == ResponseResult.OK)
                 {
-                    return View("ClassifyResponse", ClassifyResponseViewModel.ToModel(response));
+                    var viewModel = CreateModelFromVisualResponse(response);
+                    TempData[TEMP_DATA_BEER] = JsonConvert.SerializeObject(viewModel.Beer);
+                    return RedirectToAction("ClassifyResponse", viewModel);    
                 }
                 else 
                 {
@@ -78,13 +94,28 @@ namespace BeerClassWebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ClassifyResponse()
+        private ClassifyResponseViewModel CreateModelFromVisualResponse(IBMClassifyResponseModel model) 
         {
-            return View();
+            if (model.Image_procesed_list.Any()
+               && model.Image_procesed_list.First().Classifiers_list.Any()
+               && model.Image_procesed_list.First().Classifiers_list.First().Classes_list.Any())
+            {
+                var match = model.Image_procesed_list.First().Classifiers_list.First().Classes_list.First();
+                var beer = _beerService.GetBeerByClassName(match.Model_class);
+
+                var beerViewModel = BeerViewModel.FromModel(beer);
+
+                return new ClassifyResponseViewModel() { Accuracy = match.Model_score, Class = match.Model_class, Beer = beerViewModel };
+            }
+
+            return null;
         }
+
 
         public IActionResult ClassifyResponse(ClassifyResponseViewModel model)
         {
+            var viewmodel = JsonConvert.DeserializeObject<BeerViewModel>((string)TempData[TEMP_DATA_BEER]);
+            model.Beer = viewmodel;
             return View("ClassifyResponse", model);
         }
 

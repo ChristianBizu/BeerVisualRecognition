@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoRepository;
 
 namespace BeerClassWebApp
 {
@@ -28,6 +29,9 @@ namespace BeerClassWebApp
             services.AddControllersWithViews();
 
             services.AddScoped<IIBMVisualRecognitionService, IBMVisualRecognitionService>();
+            services.AddScoped<IBeerService, BeerService>();
+
+            services.AddSingleton<IMongoDB, MongoRepository.MongoDB>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

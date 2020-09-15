@@ -27,7 +27,7 @@ namespace BeerClassifier.Services.Infrastructure
 
         public IBMVisualRecognitionService() 
         {
-            
+ 
         }
 
         public void ConfigureService(string apiKey, string apiEndpoint, string apiModelId, string apiOwner) 
@@ -56,6 +56,8 @@ namespace BeerClassifier.Services.Infrastructure
                 var classify_reponse = Classify(imageName, imageURL);
 
                 IBMClassifyResponseModel response = IBMClassifyResponseModel.ToModel(classify_reponse);
+
+
 
                 return response;
             }
