@@ -66,7 +66,7 @@ namespace BeerClassWebApp.Controllers
 
                 if (response.ResponseResult == ResponseResult.OK)
                 {
-                    return View("ClassifyResponse", response);
+                    return View("ClassifyResponse", ClassifyResponseViewModel.ToModel(response));
                 }
                 else 
                 {
@@ -81,6 +81,11 @@ namespace BeerClassWebApp.Controllers
         public IActionResult ClassifyResponse()
         {
             return View();
+        }
+
+        public IActionResult ClassifyResponse(ClassifyResponseViewModel model)
+        {
+            return View("ClassifyResponse", model);
         }
 
         public IActionResult AvailableClasses()

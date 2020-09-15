@@ -1,0 +1,23 @@
+﻿
+@model BeerClassifier.Services.Model.ClassifyResponseViewModel;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Beer Scan</h1>
+    <div class="card">
+        <img class="card-img-top" src="@Model.Beer.Imgurl" alt="Card image cap">
+        <div class="card-block">
+            <h4 class="card-title">@Model.Beer.Name</h4>
+            <p class="card-text">
+            <p>
+                @Model.Beer.Desc
+            </p>
+            La foto seleccionada pertenece a la clase <strong>@Model.Class</strong> con un  <strong>@Model.Accuracy %</strong> de precision.
+            </p>
+        </div>
+    </div>
+</div>
