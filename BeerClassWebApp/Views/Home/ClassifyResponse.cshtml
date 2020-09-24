@@ -4,6 +4,9 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<style>
+body { background-image: url("C:\Users\c.bizumuremyi\source\repos\BeerClassifier\BeerClassWebApp\Images\17545.jpg"); }
+</style>
 
 <div class="text-center">
     <h1 class="display-4">Beer Scan</h1>
@@ -13,10 +16,11 @@
             <h4 class="card-title">@Model.Beer.Name</h4>
             <p class="card-text">
             <p>
+                La foto seleccionada pertenece a la clase <strong>@Model.Class</strong> con un  <strong>@Model.Accuracy %</strong> de precision.
+            </p>
+            <p>
                 @Model.Beer.Desc
-            </p>
-            La foto seleccionada pertenece a la clase <strong>@Model.Class</strong> con un  <strong>@Model.Accuracy %</strong> de precision.
-            </p>
+            </p>            
         </div>
     </div>
 </div>

@@ -81,6 +81,8 @@ namespace BeerClassWebApp.Controllers
                 if (response.ResponseResult == ResponseResult.OK)
                 {
                     var viewModel = CreateModelFromVisualResponse(response);
+                    if(viewModel == null || viewModel.Beer == null) return RedirectToAction("Index", "Home");
+
                     TempData[TEMP_DATA_BEER] = JsonConvert.SerializeObject(viewModel.Beer);
                     return RedirectToAction("ClassifyResponse", viewModel);    
                 }
